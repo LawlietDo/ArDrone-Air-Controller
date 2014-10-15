@@ -52,16 +52,7 @@ class ArCommander(threading.Thread):
 				while self.online:
 					buf = self.conn.recv(1024)
 					print '[RECV] %s' % buf
-					if buf == '':
-						self.conn.send('TRY SEND')
-					else:
-						self.handleMsg(buf)
-					tsk = self.task.get()
-					if not tsk[-1] < 0:
-						self.conn.send(tsk[0])
-						print '[SEND] %s' % tsk[0]
-					else:
-						print '[SEND NOTHING]'
+					self.handleMsg(buf)
 					time.sleep(self.freq)
 			except socket.timeout:
 				self.connection = False
@@ -73,7 +64,15 @@ class ArCommander(threading.Thread):
 	def stop(self):
 		self.online = False
 	def handleMsg(self, msg):
-		pass
+		# handle MSG
+		# send MSG
+		tsk = self.task.get()
+		if not task[-1] < 0:
+			self.conn.send(tsk)
+			print '[SEND] %s' % tsk[0]
+		else:
+			print '[SEND] HB'
+	def send
 
 if __name__ == '__main__':
 	ac = ArCommander(8003, 10, 0.2)
