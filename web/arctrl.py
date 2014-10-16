@@ -1,17 +1,24 @@
 import threading
 import socket
 import time
-import inspect  
-import ctypes  
- 
+
+def ArComEnc(cmd, arg, cot):
+	pass
+
+def ArComDec(msg):
+	pass
+
+def ArHeartBeatGen():
+	pass
+
 class TaskPender:
 	def __init__(self):
 		self.task = ('.EMPTY', -1)
 		self.count = 0
 		self.mutex = threading.Lock()
-	def set(self, task_content):
+	def set(self, cmd, arg):
 		if self.mutex.acquire():
-			self.task = (task_content, count)
+			self.task = (ArComEnc(cmd, arg, count), count)
 			count += 1
 			self.mutex.release()
 	def get(self):
@@ -65,14 +72,15 @@ class ArCommander(threading.Thread):
 		self.online = False
 	def handleMsg(self, msg):
 		# handle MSG
+		ArComDec(msg)
 		# send MSG
 		tsk = self.task.get()
 		if not task[-1] < 0:
 			self.conn.send(tsk)
 			print '[SEND] %s' % tsk[0]
 		else:
+			self.conn.send(ArHeartBeatGen())
 			print '[SEND] HB'
-	def send
 
 if __name__ == '__main__':
 	ac = ArCommander(8003, 10, 0.2)
