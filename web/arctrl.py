@@ -1,15 +1,24 @@
 import threading
 import socket
 import time
+import datetime
 
 def ArComEnc(cmd, arg, cot):
-	pass
+	cm = [str(cot), cmd] + arg + [str(len(arg))]
+	return ' '.join(ck) + ';'
 
 def ArComDec(msg):
-	pass
+	if msg[-1] != ';':
+		pass # throw EXCEPT
+	cm = msg.split(';')
+	for x in cm:
+		for y in x.split(' '):
+			pass
 
 def ArHeartBeatGen():
-	pass
+	ts = int(time.mktime(datetime.datetime.utcnow().utctimetuple()))
+	return '0 HB ' + str(ts) + ' 1;';
+	
 
 class TaskPender:
 	def __init__(self):
@@ -76,7 +85,7 @@ class ArCommander(threading.Thread):
 		# send MSG
 		tsk = self.task.get()
 		if not task[-1] < 0:
-			self.conn.send(tsk)
+			self.conn.send(tsk[0])
 			print '[SEND] %s' % tsk[0]
 		else:
 			self.conn.send(ArHeartBeatGen())
