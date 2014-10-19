@@ -11,9 +11,21 @@ def ArComDec(msg):
 	if msg[-1] != ';':
 		pass # throw EXCEPT
 	cm = msg.split(';')
+	ret = []
 	for x in cm:
-		for y in x.split(' '):
-			pass
+		if x != '':
+			try:
+				cw = x.split(' ')
+				cnt = int(cw[0])
+				cmd = cw[1]
+				arg = cw[2:-1]
+				args = int(cw[-1])
+				if args != len(arg):
+					raise ValueError('Invalid Cmd')
+				ret.append((cnt, cmd, arg))
+			except Exception:
+				raise ValueError('Invalid Cmd')
+	return ret
 
 def ArHeartBeatGen():
 	ts = int(time.mktime(datetime.datetime.utcnow().utctimetuple()))
