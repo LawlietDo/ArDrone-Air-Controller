@@ -93,18 +93,32 @@ class ArCommander(threading.Thread):
 		self.online = False
 	def handleMsg(self, msg):
 		# handle MSG
-		ArComDec(msg)
+		# ArComDec(msg)
 		# send MSG
 		tsk = self.task.get()
-		if not task[-1] < 0:
+		if not tsk[-1] < 0:
 			self.conn.send(tsk[0])
 			print '[SEND] %s' % tsk[0]
 		else:
-			self.conn.send(ArHeartBeatGen())
-			print '[SEND] HB'
+			cmhb = ArHeartBeatGen()
+			self.conn.send(cmhb)
+			print '[SEND] %s' % cmhb
+	# CONTROL interfaces for main thread --below
+	def ar_takeoff(self):
+		pass
+	def ar_land(self):
+		pass
+	def ar_flyH(self):
+		pass
+	def ar_flyV(self):
+		pass
+	def ar_turn(self):
+		pass
+	def ar_getstatus(self):
+		pass
 
 if __name__ == '__main__':
-	ac = ArCommander(8003, 10, 0.2)
+	ac = ArCommander(8000, 10, 0.2)
 	ac.setDaemon(True)
 	ac.start()
 	print 'type [stop] to stop'
