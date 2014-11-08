@@ -113,7 +113,7 @@
         if ( header[versionIndex] == VERSION && header[clientTypeIndex] == SERVER ) {
             switch (header[packetTypeIndex]) {
                 case CONNECT_PACKET:
-//                    [self processConnectionData:receiveData WithTag:tag];
+                    
                     break;
                 case OPERAND_PACKET:
                     

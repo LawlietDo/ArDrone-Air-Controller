@@ -62,9 +62,12 @@
 
 - (void)startHeartBeat;
 {
-    NSMutableData *packet = [FunctionClass generateSocketPacket:VERSION clientType:IPHONE packetType:CONNECT_PACKET operateCode:SEND_HEART_BEAT objects:nil];
-    [_svrSock writeData:packet withTimeout:-1 tag:_taskTag];
-    [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(startHeartBeat) userInfo:nil repeats:NO];
+}
+
+- (BOOL)sendData:(NSData *)data ToServerWithCompletion:(confirmBlock)completion {
+    [_svrSock writeData:data withTimeout:-1 tag:_taskTag];
+    self.taskTag++;
+    return YES;
 }
 
 #pragma mark -GCDAsyncSocketDelegate
@@ -89,6 +92,7 @@
 
 - (void)socket:(GCDAsyncSocket *)sock didWriteDataWithTag:(long)tag {
     NSLog(@"Write Success, tell the server");
+    
 }
 
 @end

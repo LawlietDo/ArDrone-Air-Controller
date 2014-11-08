@@ -11,6 +11,4 @@
 
 @interface ProtocolInterpreter : NSObject
 
-@property (nonatomic, strong) ServerCommunicator *svrCommunicator;
-
 @end

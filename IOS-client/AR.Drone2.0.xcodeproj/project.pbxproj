@@ -13,6 +13,7 @@
 		1FA4C01B19E6E96B008A5F6E /* DroneCommunicator+Convenience.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FA4C01A19E6E96B008A5F6E /* DroneCommunicator+Convenience.m */; };
 		1FF3139B19E62CDA008A4DF0 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FF3139A19E62CDA008A4DF0 /* AppDelegate.m */; };
 		7A38863E1A079A4800BA8B8B /* ProtocolInterpreter.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A38863D1A079A4800BA8B8B /* ProtocolInterpreter.m */; };
+		7A3886411A07BD0600BA8B8B /* NSString+stringFromArrayWithSeperator.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A3886401A07BD0600BA8B8B /* NSString+stringFromArrayWithSeperator.m */; };
 		7A44B17B19D7DA3F000CAFD8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A44B17A19D7DA3F000CAFD8 /* main.m */; };
 		7A44B18419D7DA3F000CAFD8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7A44B18219D7DA3F000CAFD8 /* Main.storyboard */; };
 		7A44B18619D7DA3F000CAFD8 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7A44B18519D7DA3F000CAFD8 /* Images.xcassets */; };
@@ -51,6 +52,8 @@
 		1FF3139A19E62CDA008A4DF0 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		7A38863C1A079A4800BA8B8B /* ProtocolInterpreter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProtocolInterpreter.h; sourceTree = "<group>"; };
 		7A38863D1A079A4800BA8B8B /* ProtocolInterpreter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProtocolInterpreter.m; sourceTree = "<group>"; };
+		7A38863F1A07BD0600BA8B8B /* NSString+stringFromArrayWithSeperator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+stringFromArrayWithSeperator.h"; sourceTree = "<group>"; };
+		7A3886401A07BD0600BA8B8B /* NSString+stringFromArrayWithSeperator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+stringFromArrayWithSeperator.m"; sourceTree = "<group>"; };
 		7A44B17519D7DA3F000CAFD8 /* AR.Drone2.0.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AR.Drone2.0.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A44B17919D7DA3F000CAFD8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7A44B17A19D7DA3F000CAFD8 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -134,6 +137,8 @@
 				7A44B17919D7DA3F000CAFD8 /* Info.plist */,
 				7A44B17A19D7DA3F000CAFD8 /* main.m */,
 				1F35BFAA19E7D35D003914B8 /* Constant.h */,
+				7A38863F1A07BD0600BA8B8B /* NSString+stringFromArrayWithSeperator.h */,
+				7A3886401A07BD0600BA8B8B /* NSString+stringFromArrayWithSeperator.m */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -304,6 +309,7 @@
 				1FF3139B19E62CDA008A4DF0 /* AppDelegate.m in Sources */,
 				7A44B1B119D7DB8C000CAFD8 /* DroneNavigationState.m in Sources */,
 				1F35BFB119E7D7EE003914B8 /* ServerCommunicator.m in Sources */,
+				7A3886411A07BD0600BA8B8B /* NSString+stringFromArrayWithSeperator.m in Sources */,
 				7A38863E1A079A4800BA8B8B /* ProtocolInterpreter.m in Sources */,
 				7A44B17B19D7DA3F000CAFD8 /* main.m in Sources */,
 			);

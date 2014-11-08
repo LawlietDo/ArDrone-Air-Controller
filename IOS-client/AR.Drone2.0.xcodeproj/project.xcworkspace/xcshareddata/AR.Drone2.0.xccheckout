@@ -12,20 +12,24 @@
 	<dict>
 		<key>57006CF682841C5C58C8804F9C1781A114750D75</key>
 		<string>https://bitbucket.org/dafeiji/ar.drone2.0_ios.git</string>
+		<key>ADAFA614111ADF4674E576B657320C4FA6BBEC3B</key>
+		<string>http://github.com/lams2135/ArDrone-Air-Controller</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>AR.Drone2.0/AR.Drone2.0.xcodeproj</string>
+	<string>IOS-client/AR.Drone2.0.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>57006CF682841C5C58C8804F9C1781A114750D75</key>
+		<string>../../../../AR.Drone</string>
+		<key>ADAFA614111ADF4674E576B657320C4FA6BBEC3B</key>
 		<string>../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://bitbucket.org/dafeiji/ar.drone2.0_ios.git</string>
+	<string>http://github.com/lams2135/ArDrone-Air-Controller</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>57006CF682841C5C58C8804F9C1781A114750D75</string>
+	<string>ADAFA614111ADF4674E576B657320C4FA6BBEC3B</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
@@ -35,6 +39,14 @@
 			<string>57006CF682841C5C58C8804F9C1781A114750D75</string>
 			<key>IDESourceControlWCCName</key>
 			<string>AR.Drone</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>ADAFA614111ADF4674E576B657320C4FA6BBEC3B</string>
+			<key>IDESourceControlWCCName</key>
+			<string>AR.Drone%202.0</string>
 		</dict>
 	</array>
 </dict>

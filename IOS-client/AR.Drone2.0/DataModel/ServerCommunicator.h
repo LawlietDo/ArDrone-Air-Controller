@@ -20,6 +20,8 @@ typedef void (^confirmBlock)( BOOL success, NSError *err );
 
 - (void)startHeartBeat;
 
+- (BOOL)sendData:(NSData *)data ToServerWithCompletion:(confirmBlock)completion;
+
 /**
  *  receive queue handler
  */
