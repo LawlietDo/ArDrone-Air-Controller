@@ -8,11 +8,13 @@
 
 #import "ProtocolInterpreter.h"
 #import "Constant.h"
+#import "DroneNavigationState.h"
 #import "DroneCommunicator+Convenience.h"
 #import "FunctionClass.h"
+#import "Log.h"
 
 @interface ProtocolInterpreter ()
-
+@property (nonatomic, strong) DroneCommunicator *droneCommunicator;
 @property (nonatomic, strong) ServerCommunicator *svrCommunicator;
 @property (nonatomic, strong) NSString *packageId;
 @end
@@ -23,6 +25,7 @@
     self = [super init];
     __weak id weakSelf = self;
     if ( self ) {
+        self.droneCommunicator = [[DroneCommunicator alloc] init];
         self.svrCommunicator = [[ServerCommunicator alloc] init];
         _svrCommunicator.receiveFilter = ^(NSData *receiveData, long tag) {
             NSString *messages = [[NSString alloc] initWithData:receiveData encoding:NSASCIIStringEncoding];
@@ -63,7 +66,20 @@
 }
 
 - (void)processStateQuery {
-    NSData *package = [FunctionClass generateSocketPacket:QueryState Identifier:self.packageId object:nil];
+    NSString *stateString = [NSString stringWithFormat:@"%d %d %lf %lf %lf %lf %lf %lf %lf %lf",
+                             _droneCommunicator.navigationState.controlState,
+                             _droneCommunicator.navigationState.batteryLevel,
+                             _droneCommunicator.navigationState.pitch,
+                             _droneCommunicator.navigationState.pitch,
+                             _droneCommunicator.navigationState.roll,
+                             _droneCommunicator.navigationState.yaw,
+                             _droneCommunicator.navigationState.altitude,
+                             _droneCommunicator.navigationState.speedX,
+                             _droneCommunicator.navigationState.speedY,
+                             _droneCommunicator.navigationState.speedZ
+                             ];
+    
+    NSData *package = [FunctionClass generateSocketPacket:QueryState Identifier:self.packageId object:stateString, nil];
     [self.svrCommunicator sendData:package ToServerWithCompletion:^(BOOL success, NSError *err) {
         if ( success ) {
             NSLog(@"Haha");
@@ -72,29 +88,60 @@
 }
 
 - (void)processHeartBeat {
+    NSData *package = [FunctionClass generateSocketPacket:HEARTBEAT Identifier:self.packageId object:nil];
+    [self.svrCommunicator sendData:package ToServerWithCompletion:^(BOOL success, NSError *err) {
+        if ( success ) {
+            NSLog(@"Response HeartBeat");
+        }
+    }];
 }
 
 - (void)processTakeoff {
-    
+    [_droneCommunicator takeoff];
+    NSData *package = [FunctionClass generateSocketPacket:TakeOff Identifier:self.packageId object:@"success", nil];
+    [_svrCommunicator sendData:package ToServerWithCompletion:^(BOOL success, NSError *err) {
+        if ( success ) {
+            NSLog(@"TakeOff Success");
+        }
+    }];
 }
 
 - (void)processLand {
-    
+    [_droneCommunicator land];
+    NSData *package = [FunctionClass generateSocketPacket:Land Identifier:self.packageId object:@"success", nil];
+    [_svrCommunicator sendData:package ToServerWithCompletion:^(BOOL success, NSError *err) {
+        if ( success ) {
+            NSLog(@"Land success");
+        }
+    }];
 }
 
 - (void)processHorver {
-    
+    [_droneCommunicator hover];
+    NSData *package = [FunctionClass generateSocketPacket:Horver Identifier:self.packageId object:@"success", nil];
+    [_svrCommunicator sendData:package ToServerWithCompletion:^(BOOL success, NSError *err) {
+        if ( success ) {
+            NSLog(@"Hover success");
+        }
+    }];
+
 }
 
 - (void)processFlyForWard:(NSArray *)argvs {
-    
+    NSString *speed = argvs[0];
+    NSString *time = argvs[1];
+    // TODO:
 }
 
 - (void)processArgChange:(NSArray *)argvs {
+    NSString *argSpeed = argvs[0];
+    NSString *time = argvs[1];
+    //TODO:
     
 }
 
 - (void)processHeightChange:(NSArray *)argvs {
-    
+    NSString *heightChange = argvs[0];
+    //TODO:
 }
 @end

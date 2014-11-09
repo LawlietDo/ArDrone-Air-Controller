@@ -7,9 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
-typedef void (^onReceiveBlock)( NSData *data, long tag );
-typedef void (^confirmBlock)( BOOL success, NSError *err );
+#import "Constant.h"
 
 @interface ServerCommunicator : NSObject
 

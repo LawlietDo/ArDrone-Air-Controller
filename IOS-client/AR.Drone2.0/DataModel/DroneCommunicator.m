@@ -22,7 +22,7 @@
 @property (nonatomic, strong) NSTimer *updateTimer;
 
 
-@property (nonatomic, strong) DroneNavigationState *navigationState;
+@property (nonatomic, strong, readwrite) DroneNavigationState *navigationState;
 - (void)sendString:(NSString *)string;
 - (int)setConfigurationKey:(NSString *)key toString:(NSString *)string;
 - (int)sendCommand:(NSString *)command arguments:(NSArray *)arguments;
@@ -155,11 +155,11 @@
 - (void)update:(NSTimer *)timer;
 {
     if (self.isFlying) {
-        BOOL shouldMove = !self.forceHover && (self.rotationSpeed != 0 || self.forwardSpeed != 0);
+        BOOL shouldMove = !self.forceHover && (self.rotationSpeed != 0 || self.forwardSpeed != 0 || self.verticalSpeed != 0);
 
-        NSLog(@"force hover: %d, rotation speed: %f, forward speed: %f", self.forceHover, self.rotationSpeed, self.forwardSpeed);
+        NSLog(@"force hover: %d, rotation speed: %f, forward speed: %f, vertical speed: %f", self.forceHover, self.rotationSpeed, self.forwardSpeed, self.verticalSpeed);
         if (shouldMove) {
-            self.flightState = @[@1,@0,@(self.forwardSpeed),@0,@(self.rotationSpeed)];
+            self.flightState = @[@1,@0,@(self.forwardSpeed),@(self.verticalSpeed),@(self.rotationSpeed)];
         } else {
             self.flightState = @[@0,@0,@0,@0,@0];
         }

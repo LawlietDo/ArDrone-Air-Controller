@@ -89,7 +89,7 @@
     }
     NSString *argvsString = [NSString stringFromArray:argvs WithSeperator:Br];
     
-    NSString *packet = [NSString stringWithFormat:@"%d %@ %@ %lu", packetId, Response, argvsString, [argvs count]];
+    NSString *packet = [NSString stringWithFormat:@"%d %@ %@ %lu", packetId, Response, argvsString, (unsigned long)[argvs count]];
     NSLog(@"Packet: %@ send to Server...", packet);
     return [packet dataUsingEncoding:NSASCIIStringEncoding];
 }

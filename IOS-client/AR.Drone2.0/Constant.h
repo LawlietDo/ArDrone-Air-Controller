@@ -24,6 +24,10 @@ static NSString * const ServerAddress = @"115.29.202.247";
 static uint32_t const magicHeaderValue = 0x55667788;
 static NSUInteger const maxLength = 1024 * 8;
 
+
+typedef void (^onReceiveBlock)( NSData *data, long tag );
+typedef void (^confirmBlock)( BOOL success, NSError *err );
+
 //////////////////////////Protocol Part //////////////////////////////
 //#define VERSION 0x01
 //static NSUInteger const versionIndex = 0;
