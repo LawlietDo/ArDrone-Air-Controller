@@ -22,9 +22,11 @@ def ArComDec(msg):
 				arg = cw[2:-1]
 				args = int(cw[-1])
 				if args != len(arg):
+					print 'ARComDec len VE'
 					raise ValueError('Invalid Cmd')
 				ret.append((cnt, cmd, arg))
 			except Exception:
+				print 'ARCD VE'
 				raise ValueError('Invalid Cmd')
 	return ret
 
@@ -90,6 +92,7 @@ class ArSocketer(threading.Thread):
 			try:
 				self.conn.settimeout(self.timeout)
 				self.conn.send(ArHeartBeatGen())
+				print '8000 OnConnect HB sent'
 				while self.online:
 					buf = self.conn.recv(1024)
 					print '[%d RECV] %s' % (self.port, buf)
@@ -176,13 +179,15 @@ if __name__ == '__main__':
 			if aro.signed == True:
 				# pass msg to arc
 				pass
-	arc = ArCommander(8000, 10, 0.1, arc_act)
+	arc = ArCommander(8080, 10, 0.1, arc_act)
 	aro = ArOutsideCommander(8001, 10, 0.1, aro_act)
+	arc.start()
+	aro.start()
 	while True:
 		cmd = raw_input()
 		if cmd == 'stop':
-			ac.stop()
-			ac.join(1)
+			arc.sock.stop()
+			arc.sock.join(1)
 			print 'exited'
 			break
 		if cmd == 'arc':

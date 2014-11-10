@@ -8,9 +8,9 @@ def ArHeartBeatGen():
 
 if __name__ == '__main__':
 	sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-	sock.connect(('localhost', 8000))
+	sock.connect(('localhost', 8080))
 	while True:
-		sock.send(ArHeartBeatGen())
 		print sock.recv(1024)
 		time.sleep(1)
+		sock.send(ArHeartBeatGen())
 	sock.close()
