@@ -49,6 +49,9 @@ class TaskPender:
 	def get(self):
 		if self.mutex.acquire():
 			ret = self.task
+			if ret[1] < 0:
+				self.mutex.release()
+				return ret
 			if ret[0].split(' ')[1] == 'RES':
 				self.task = ('.EMPTY', -1)
 			elif ret[1] not in self.queue:
@@ -109,14 +112,19 @@ class ArSocketer(threading.Thread):
 		self.online = False
 	def handleMsg(self, msg):
 		# handle MSG
+		print 'start hand msg'
 		self.actor(ArComDec(msg))
 		# send MSG
+		print 'start send msg'
 		tsk = self.task.get()
+		print tsk
 		if not tsk[-1] < 0:
+			print 'send task'
 			self.conn.send(tsk[0])
 			print '[%d SEND] %s' % (self.port, tsk[0])
 		else:
 			cmhb = ArHeartBeatGen()
+			print 'send hb %s' % cmhb
 			self.conn.send(cmhb)
 			print '[%d SEND] %s' % (self.port, cmhb)
 
@@ -188,6 +196,8 @@ if __name__ == '__main__':
 		if cmd == 'stop':
 			arc.sock.stop()
 			arc.sock.join(1)
+			aro.sock.stop()
+			aro.sock.join(1)
 			print 'exited'
 			break
 		if cmd == 'arc':
@@ -209,5 +219,7 @@ if __name__ == '__main__':
 					arc.ar_flyV(0.5, 0.2)
 				elif cwd == 'turn':
 					arc.ar_turn(0.5, 0.2)
+			else:
+				print 'ArCommander not ready'
 		else:
 			print 'type [stop] to stop'
