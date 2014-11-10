@@ -10,22 +10,34 @@
 	<string>AR.Drone2.0</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
+<<<<<<< HEAD
+		<key>ADAFA614111ADF4674E576B657320C4FA6BBEC3B</key>
+		<string>https://github.com/lams2135/ArDrone-Air-Controller</string>
+=======
 		<key>57006CF682841C5C58C8804F9C1781A114750D75</key>
 		<string>https://bitbucket.org/dafeiji/ar.drone2.0_ios.git</string>
 		<key>ADAFA614111ADF4674E576B657320C4FA6BBEC3B</key>
 		<string>http://github.com/lams2135/ArDrone-Air-Controller</string>
+>>>>>>> c595568faaee74c9c6365cd7cc6c2ec613f41890
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>IOS-client/AR.Drone2.0.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
+<<<<<<< HEAD
+=======
 		<key>57006CF682841C5C58C8804F9C1781A114750D75</key>
 		<string>../../../../AR.Drone</string>
+>>>>>>> c595568faaee74c9c6365cd7cc6c2ec613f41890
 		<key>ADAFA614111ADF4674E576B657320C4FA6BBEC3B</key>
 		<string>../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
+<<<<<<< HEAD
+	<string>https://github.com/lams2135/ArDrone-Air-Controller</string>
+=======
 	<string>http://github.com/lams2135/ArDrone-Air-Controller</string>
+>>>>>>> c595568faaee74c9c6365cd7cc6c2ec613f41890
 	<key>IDESourceControlProjectVersion</key>
 	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
@@ -36,9 +48,9 @@
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>57006CF682841C5C58C8804F9C1781A114750D75</string>
+			<string>ADAFA614111ADF4674E576B657320C4FA6BBEC3B</string>
 			<key>IDESourceControlWCCName</key>
-			<string>AR.Drone</string>
+			<string>ArDrone-Air-Controller</string>
 		</dict>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
