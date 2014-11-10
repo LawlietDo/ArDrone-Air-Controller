@@ -17,6 +17,7 @@
         if ( [eachObject isKindOfClass:[NSString class]] ) {
             if ( first ) {
                 first = NO;
+                [result appendString:eachObject];
             } else {
                 [result appendFormat:@" %@", eachObject];
             }

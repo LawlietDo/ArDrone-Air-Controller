@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AR.Drone2.0/ViewControllers/ViewController.m"
-            timestampString = "434874965.118109"
+            timestampString = "437312407.200883"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "24"
-            endingLineNumber = "24"
+            startingLineNumber = "25"
+            endingLineNumber = "25"
             landmarkName = "-viewDidLoad"
             landmarkType = "5">
          </BreakpointContent>
@@ -74,11 +74,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AR.Drone2.0/DataModel/DroneCommunicator.m"
-            timestampString = "434872575.971096"
+            timestampString = "437312407.200883"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "77"
-            endingLineNumber = "77"
+            startingLineNumber = "79"
+            endingLineNumber = "79"
             landmarkName = "-datagramSocket:didReceiveData:"
             landmarkType = "5">
          </BreakpointContent>
@@ -105,30 +105,46 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "AR.Drone2.0/ViewControllers/ViewController.m"
-            timestampString = "434887886.808432"
+            filePath = "AR.Drone2.0/DataModel/ProtocolInterpreter.m"
+            timestampString = "437314516.173004"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "208"
-            endingLineNumber = "208"
-            landmarkName = "-textFieldShouldReturn:"
+            startingLineNumber = "34"
+            endingLineNumber = "34"
+            landmarkName = "-init"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "AR.Drone2.0/ViewControllers/ViewController.m"
-            timestampString = "434887886.808432"
+            filePath = "AR.Drone2.0/Socket/GCDAsyncSocket.m"
+            timestampString = "437313329.630011"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "205"
-            endingLineNumber = "205"
-            landmarkName = "-textFieldShouldReturn:"
+            startingLineNumber = "3876"
+            endingLineNumber = "3876"
+            landmarkName = "-readDataToLength:withTimeout:buffer:bufferOffset:tag:"
             landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AR.Drone2.0/DataModel/ServerCommunicator.h"
+            timestampString = "437314448.796869"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "35"
+            endingLineNumber = "35"
+            landmarkName = "delegate"
+            landmarkType = "19">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

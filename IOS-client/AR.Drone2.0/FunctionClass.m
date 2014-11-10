@@ -88,8 +88,14 @@
         }
     }
     NSString *argvsString = [NSString stringFromArray:argvs WithSeperator:Br];
-    
-    NSString *packet = [NSString stringWithFormat:@"%d %@ %@ %lu", packetId, Response, argvsString, (unsigned long)[argvs count]];
+    NSLog(@"ArgvsString: %@", argvsString);
+    NSString *toCommand;
+    if ( [command isEqualToString:HEARTBEAT] ) {
+        toCommand = HEARTBEAT;
+    } else {
+        toCommand = Response;
+    }
+    NSString *packet = [NSString stringWithFormat:@"%d %@ %@ %lu%@", packetId, toCommand, argvsString, (unsigned long)[argvs count], End];
     NSLog(@"Packet: %@ send to Server...", packet);
     return [packet dataUsingEncoding:NSASCIIStringEncoding];
 }

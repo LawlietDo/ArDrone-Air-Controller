@@ -11,4 +11,8 @@
 
 @interface ProtocolInterpreter : NSObject
 
+- (void)start;
+
+- (void)sendHeartBeat;
+
 @end

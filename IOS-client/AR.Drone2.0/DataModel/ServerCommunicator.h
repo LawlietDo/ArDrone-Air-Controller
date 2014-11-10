@@ -9,6 +9,13 @@
 #import <Foundation/Foundation.h>
 #import "Constant.h"
 
+@protocol ServerCommunicatorProtocol <NSObject>
+
+@required
+- (void)sendHeartBeat;
+
+@end
+
 @interface ServerCommunicator : NSObject
 
 - (void)setupDefaults;
@@ -25,5 +32,7 @@
  */
 @property (nonatomic, strong) onReceiveBlock receiveFilter;
 @property (nonatomic,readonly, getter=isConnected) BOOL connected;
+#warning strongly unrecommand design pattern !
+@property (nonatomic, weak) id<ServerCommunicatorProtocol> delegate;
 
 @end

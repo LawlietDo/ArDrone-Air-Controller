@@ -39,7 +39,9 @@
     self.receiveFilter = nil;
     self.connected = NO;
     self.taskTag = 0;
-    [self connectToServer:ServerAddress OnPort:ServerPort WithCompletion:^(BOOL success, NSError *err) {
+    [self connectToServer:ServerAddress
+                   OnPort:ServerPort
+           WithCompletion:^(BOOL success, NSError *err) {
         if ( !err ) {
             NSLog(@"Connect Success!");
         } else {
@@ -60,12 +62,12 @@
     }
 }
 
-- (void)startHeartBeat;
-{
+- (void)startHeartBeat {
+    [self.delegate sendHeartBeat];
 }
 
 - (BOOL)sendData:(NSData *)data ToServerWithCompletion:(confirmBlock)completion {
-    [_svrSock writeData:data withTimeout:-1 tag:_taskTag];
+    [_svrSock writeData:data withTimeout:TCPSocketNotTimeOut tag:_taskTag];
     self.taskTag++;
     return YES;
 }
@@ -74,11 +76,13 @@
 - (void)socketDidDisconnect:(GCDAsyncSocket *)sock withError:(NSError *)err;
 {
     NSLog(@"DisConnectWithError:%@", err);
+    self.connected = NO;
 }
 
 - (void)socket:(GCDAsyncSocket *)sock didConnectToHost:(NSString *)host port:(uint16_t)port {
     NSLog(@"Connect Success!");
-    [sock readDataToLength:maxLength withTimeout:-1 tag:_taskTag];
+    [self startHeartBeat];
+    [sock readDataToLength:maxLength withTimeout:TCPSocketNotTimeOut tag:_taskTag];
     self.connected = YES;
     _aBlock( YES, nil );
 }
@@ -92,7 +96,6 @@
 
 - (void)socket:(GCDAsyncSocket *)sock didWriteDataWithTag:(long)tag {
     NSLog(@"Write Success, tell the server");
-    
 }
 
 @end

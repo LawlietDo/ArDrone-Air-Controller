@@ -13,7 +13,8 @@
 #import "FunctionClass.h"
 #import "Log.h"
 
-@interface ProtocolInterpreter ()
+@interface ProtocolInterpreter ()<ServerCommunicatorProtocol>
+
 @property (nonatomic, strong) DroneCommunicator *droneCommunicator;
 @property (nonatomic, strong) ServerCommunicator *svrCommunicator;
 @property (nonatomic, strong) NSString *packageId;
@@ -25,11 +26,14 @@
     self = [super init];
     __weak id weakSelf = self;
     if ( self ) {
+        self.packageId = @"0";
         self.droneCommunicator = [[DroneCommunicator alloc] init];
         self.svrCommunicator = [[ServerCommunicator alloc] init];
+        _svrCommunicator.delegate = self;
         _svrCommunicator.receiveFilter = ^(NSData *receiveData, long tag) {
             NSString *messages = [[NSString alloc] initWithData:receiveData encoding:NSASCIIStringEncoding];
             NSArray *messagesArray = [messages componentsSeparatedByString:End];
+            NSLog(@"Recv Message Array: %@", messagesArray);
             for ( NSString *msg in messagesArray ) {
                 NSArray *argvs = [msg componentsSeparatedByString:Br];
                 NSString *packageId = argvs[packageIdIndex];
@@ -38,10 +42,11 @@
                 NSUInteger commandArgvsLen = [argvs count] - argvsBeginIndex - 1;
                 NSArray *commandRecvArgvs = [argvs subarrayWithRange:NSMakeRange(argvsBeginIndex, commandArgvsLen)];
                 if ( [commandRecvArgvs count] != [[argvs lastObject] unsignedIntegerValue] ) {
-                    return; //校验失败
+                    NSLog(@"Check Sum Fail: %@", messagesArray);
+                    return;
                 }
                 if ( [command isEqualToString:HEARTBEAT] ) {
-                    [weakSelf processHeartBeat];
+                    [weakSelf sendHeartBeat];
                 } else if ( [command isEqualToString:QueryState] ) {
                     [weakSelf processStateQuery];
                 } else if ( [command isEqualToString:TakeOff] ) {
@@ -83,15 +88,19 @@
     [self.svrCommunicator sendData:package ToServerWithCompletion:^(BOOL success, NSError *err) {
         if ( success ) {
             NSLog(@"Haha");
+        } else {
+            NSLog(@"Return Query State Error: %@", err);
         }
     }];
 }
 
-- (void)processHeartBeat {
+- (void)sendHeartBeat {
     NSData *package = [FunctionClass generateSocketPacket:HEARTBEAT Identifier:self.packageId object:nil];
     [self.svrCommunicator sendData:package ToServerWithCompletion:^(BOOL success, NSError *err) {
         if ( success ) {
-            NSLog(@"Response HeartBeat");
+            NSLog(@"Send HeartBeat");
+        } else {
+            NSLog(@"Response HeartBeat Error: %@", err);
         }
     }];
 }
@@ -102,6 +111,8 @@
     [_svrCommunicator sendData:package ToServerWithCompletion:^(BOOL success, NSError *err) {
         if ( success ) {
             NSLog(@"TakeOff Success");
+        } else {
+            NSLog(@"Response TakeOff Error: %@", err);
         }
     }];
 }
@@ -112,6 +123,8 @@
     [_svrCommunicator sendData:package ToServerWithCompletion:^(BOOL success, NSError *err) {
         if ( success ) {
             NSLog(@"Land success");
+        } else {
+            NSLog(@"Response Land Error: %@", err);
         }
     }];
 }
@@ -122,26 +135,39 @@
     [_svrCommunicator sendData:package ToServerWithCompletion:^(BOOL success, NSError *err) {
         if ( success ) {
             NSLog(@"Hover success");
+        } else {
+            NSLog(@"Response Hover Error: %@", err);
         }
     }];
-
 }
 
 - (void)processFlyForWard:(NSArray *)argvs {
     NSString *speed = argvs[0];
+    _droneCommunicator.forwardSpeed = [speed doubleValue];
+    _droneCommunicator.rotationSpeed = 0;
+    _droneCommunicator.verticalSpeed = 0;
     NSString *time = argvs[1];
-    // TODO:
+    [NSTimer scheduledTimerWithTimeInterval:[time doubleValue] target:self selector:@selector(processHorver) userInfo:nil repeats:NO];
 }
 
 - (void)processArgChange:(NSArray *)argvs {
     NSString *argSpeed = argvs[0];
     NSString *time = argvs[1];
-    //TODO:
-    
+    _droneCommunicator.forwardSpeed = 0;
+    _droneCommunicator.rotationSpeed = [argSpeed doubleValue];
+    _droneCommunicator.verticalSpeed = 0;
+    [NSTimer scheduledTimerWithTimeInterval:[time doubleValue] target:self selector:@selector(processHorver) userInfo:nil repeats:NO];
 }
 
 - (void)processHeightChange:(NSArray *)argvs {
     NSString *heightChange = argvs[0];
     //TODO:
+    _droneCommunicator.verticalSpeed = [heightChange doubleValue];
 }
+
+- (void)start {
+    [_droneCommunicator setupDefaults];
+    [_svrCommunicator setupDefaults];
+}
+
 @end
