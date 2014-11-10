@@ -105,29 +105,6 @@
     [self.view addSubview:rightBtn];
 
     
-    self.droneCmtor = [DroneCommunicator new];
-    self.svrCmtor = [ServerCommunicator new];
-    self.svrCmtor.receiveFilter = ^(NSData *receiveData, long tag) {
-        char header[8] = {};
-        [receiveData getBytes:&header range:NSMakeRange(0, 8)];
-        if ( header[versionIndex] == VERSION && header[clientTypeIndex] == SERVER ) {
-            switch (header[packetTypeIndex]) {
-                case CONNECT_PACKET:
-//                    [self processConnectionData:receiveData WithTag:tag];
-                    break;
-                case OPERAND_PACKET:
-                    
-                    break;
-                    
-                case STATE_PACKET:
-                    
-                    break;
-                    
-                default:
-                    break;
-            }
-        }
-    };
 }
 
 - (void)didReceiveMemoryWarning {

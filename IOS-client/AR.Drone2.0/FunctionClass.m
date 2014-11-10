@@ -7,6 +7,9 @@
 //
 
 #import "FunctionClass.h"
+#import "Constant.h"
+#import "NSString+stringFromArrayWithSeperator.h"
+
 @implementation FunctionClass
 
 + (NSMutableData *)generateSocketPacket:(char)version clientType:(char)client packetType:(char)type operateCode:(char)code objects:(id)first,...;
@@ -37,7 +40,7 @@
         va_end(argumentList);
     }
     [body appendData:[@"\0" dataUsingEncoding:NSUTF8StringEncoding]];
-    int len = [body length];
+    int len = (int)[body length];
     NSString *lenStr = [FunctionClass setLength:len];
     NSString *str = [NSMutableString stringWithFormat:@"%c%c%c%c%@",version,client,type,code,lenStr];
     [packet appendData:[str dataUsingEncoding:NSUTF8StringEncoding]];
@@ -65,5 +68,29 @@
         total += (int)(str[i] - '0') * pow(10.0, len - i - 1);
     }
     return total;
+}
+
++ (NSData *)generateSocketPacket:(NSString *)command Identifier:(NSString *)packageId object:(id)first, ... {
+    packetId++; //first
+    NSMutableArray *argvs = [NSMutableArray new];   //third
+    [argvs addObjectsFromArray:@[command, packageId]];
+    id eachObject;
+    va_list argvsList;
+    if ( first ) {
+        va_start(argvsList, first); //skip first object(nil)
+        while ( (eachObject = va_arg(argvsList, id)) ) {
+            if ( [eachObject isKindOfClass:[NSString class]] ) {
+                [argvs addObject:eachObject];
+            } else {
+                NSLog(@"Generate Error: objects are not strings");
+                return nil;
+            }
+        }
+    }
+    NSString *argvsString = [NSString stringFromArray:argvs WithSeperator:Br];
+    
+    NSString *packet = [NSString stringWithFormat:@"%d %@ %@ %lu", packetId, Response, argvsString, (unsigned long)[argvs count]];
+    NSLog(@"Packet: %@ send to Server...", packet);
+    return [packet dataUsingEncoding:NSASCIIStringEncoding];
 }
 @end

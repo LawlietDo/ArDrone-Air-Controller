@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Constant.h"
 
 @class DroneNavigationState;
 
@@ -24,10 +25,12 @@
 /// @a amount is clamped from -1 (CCW) to +1 (CW)
 @property (nonatomic) double rotationSpeed;
 
-@property (nonatomic, strong, readonly) DroneNavigationState *navigationState;
+/// @a amount is clamped from -1 to + 1
+@property (nonatomic) double verticalSpeed;
 
+@property (nonatomic, strong, readonly) DroneNavigationState *navigationState;
+@property (nonatomic, assign) confirmBlock datagramBlock;
 @property (nonatomic) BOOL forceHover;
 
 @property (nonatomic) BOOL isFlying;
-
 @end

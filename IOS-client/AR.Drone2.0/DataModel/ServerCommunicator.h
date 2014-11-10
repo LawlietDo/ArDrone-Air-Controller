@@ -7,9 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
-typedef void (^onReceiveBlock)( NSData *data, long tag );
-typedef void (^confirmBlock)( BOOL success, NSError *err );
+#import "Constant.h"
 
 @interface ServerCommunicator : NSObject
 
@@ -19,6 +17,8 @@ typedef void (^confirmBlock)( BOOL success, NSError *err );
          WithCompletion:(confirmBlock)handler;
 
 - (void)startHeartBeat;
+
+- (BOOL)sendData:(NSData *)data ToServerWithCompletion:(confirmBlock)completion;
 
 /**
  *  receive queue handler
