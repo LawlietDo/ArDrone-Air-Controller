@@ -8,7 +8,7 @@ def ArComEnc(cmd, arg, cot):
 	return ' '.join(ck) + ';'
 
 def ArComDec(msg):
-	if msg[-1] != ';' && msg[-1] != '\n':
+	if msg[-1] != ';' and msg[-1] != '\n':
 		print '[ERR] MSG cannot be recognized.'
 		pass # throw EXCEPT
 	cm = msg.split(';')
