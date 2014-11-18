@@ -143,11 +143,11 @@ class ArCommander:
 	def ar_hover(self):
 		self.sock.task.set('HOV', [])
 	def ar_flyH(self, speed, dtime):
-		self.sock.task.set('FLY', [speed, dtime])
+		self.sock.task.set('FLY', [str(speed), str(dtime)])
 	def ar_flyV(self, speed, dtime):
-		self.sock.task.set('DIR', [speed, dtime])
+		self.sock.task.set('DIR', [str(speed), str(dtime)])
 	def ar_turn(self, speed, dtime):
-		self.sock.task.set('HEI', [speed, dtime])
+		self.sock.task.set('HEI', [str(speed), str(dtime)])
 	def ar_getstatus(self):
 		self.sock.task.set('QRS', [])
 
