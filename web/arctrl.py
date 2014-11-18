@@ -8,7 +8,7 @@ def ArComEnc(cmd, arg, cot):
 	return ' '.join(ck) + ';'
 
 def ArComDec(msg):
-	if msg[-1] != ';' && msg[-1] != '\n':
+	if msg[-1] != ';' and msg[-1] != '\n':
 		print '[ERR] MSG cannot be recognized.'
 		pass # throw EXCEPT
 	cm = msg.split(';')
@@ -43,10 +43,10 @@ class TaskPender:
 		self.mutex = threading.Lock()
 	def set(self, cmd, arg):
 		if self.mutex.acquire():
-			self.task = (ArComEnc(cmd, arg, count), count)
-			count += 1
+			self.task = (ArComEnc(cmd, arg, self.count), self.count)
+			self.count += 1
 			self.mutex.release()
-			return count
+			return self.count
 	def get(self):
 		if self.mutex.acquire():
 			ret = self.task
