@@ -15,12 +15,12 @@
 
 @property (nonatomic, strong) DatagramSocket *commandSocket;
 @property (nonatomic, strong) DatagramSocket *navigationDataSocket;
+@property (nonatomic, strong) DatagramSocket *videoSocket;
 @property (nonatomic) int commandSequence;
 @property (nonatomic, strong) NSArray *flightState;
 @property (readonly, nonatomic, copy) NSData *triggerData;
 
 @property (nonatomic, strong) NSTimer *updateTimer;
-
 
 @property (nonatomic, strong, readwrite) DroneNavigationState *navigationState;
 - (void)sendString:(NSString *)string;
@@ -56,6 +56,8 @@
     self.navigationDataSocket = [DatagramSocket ipv4socketWithAddress:DroneAddress port:NavigationDataPort receiveDelegate:self receiveQueue:[NSOperationQueue mainQueue] error:&error];
     // Sending the 'trigger' will cause the navigation data to start to be sent:
     [self.navigationDataSocket asynchronouslySendData:self.triggerData];
+    
+    self.videoSocket = [DatagramSocket ipv4socketWithAddress:DroneAddress port:OnBoardVideoPort receiveDelegate:self receiveQueue:[NSOperationQueue mainQueue] error:&error];
     
     NSAssert(self.commandSocket != nil, @"Failed to create command socket: %@", error);
 }
@@ -193,6 +195,10 @@
 - (void)setForwardSpeed:(double)forwardSpeed
 {
     _forwardSpeed = fmax(-1, fmin(1, forwardSpeed));
+}
+
+- (void)setVerticalSpeed:(double)verticalSpeed {
+    _verticalSpeed = fmax(-1, fmin(1, verticalSpeed));
 }
 
 - (void)setupDefaults

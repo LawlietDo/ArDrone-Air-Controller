@@ -23,7 +23,6 @@
 		7A44B1AD19D7DB65000CAFD8 /* DatagramSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A44B1AC19D7DB65000CAFD8 /* DatagramSocket.m */; };
 		7A44B1B119D7DB8C000CAFD8 /* DroneNavigationState.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A44B1B019D7DB8C000CAFD8 /* DroneNavigationState.m */; };
 		7AB3430419EBA4DB00AE5E29 /* FunctionClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AB3430319EBA4DB00AE5E29 /* FunctionClass.m */; };
-		7AB3430719EBAD4F00AE5E29 /* DataParseClasss.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AB3430619EBAD4F00AE5E29 /* DataParseClasss.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,8 +70,6 @@
 		7A44B1B019D7DB8C000CAFD8 /* DroneNavigationState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DroneNavigationState.m; sourceTree = "<group>"; };
 		7AB3430219EBA4DB00AE5E29 /* FunctionClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FunctionClass.h; sourceTree = "<group>"; };
 		7AB3430319EBA4DB00AE5E29 /* FunctionClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FunctionClass.m; sourceTree = "<group>"; };
-		7AB3430519EBAD4F00AE5E29 /* DataParseClasss.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataParseClasss.h; sourceTree = "<group>"; };
-		7AB3430619EBAD4F00AE5E29 /* DataParseClasss.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataParseClasss.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -191,8 +188,6 @@
 				1FA4C01A19E6E96B008A5F6E /* DroneCommunicator+Convenience.m */,
 				1F35BFAF19E7D7EE003914B8 /* ServerCommunicator.h */,
 				1F35BFB019E7D7EE003914B8 /* ServerCommunicator.m */,
-				7AB3430519EBAD4F00AE5E29 /* DataParseClasss.h */,
-				7AB3430619EBAD4F00AE5E29 /* DataParseClasss.m */,
 				7A38863C1A079A4800BA8B8B /* ProtocolInterpreter.h */,
 				7A38863D1A079A4800BA8B8B /* ProtocolInterpreter.m */,
 			);
@@ -301,7 +296,6 @@
 			files = (
 				1F35BFAE19E7D69D003914B8 /* GCDAsyncSocket.m in Sources */,
 				7A44B1AD19D7DB65000CAFD8 /* DatagramSocket.m in Sources */,
-				7AB3430719EBAD4F00AE5E29 /* DataParseClasss.m in Sources */,
 				1FA4C01819E6E934008A5F6E /* DroneCommunicator.m in Sources */,
 				1FA4C01B19E6E96B008A5F6E /* DroneCommunicator+Convenience.m in Sources */,
 				7AB3430419EBA4DB00AE5E29 /* FunctionClass.m in Sources */,

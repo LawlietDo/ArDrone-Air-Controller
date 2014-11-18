@@ -11,9 +11,10 @@
 #import "../DataModel/ServerCommunicator.h"
 #import "../DataModel/DroneCommunicator+Convenience.h"
 #import "Constant.h"
+#import "ProtocolInterpreter.h"
 
 @interface ViewController ()<UITextFieldDelegate>
-
+@property (nonatomic, strong) ProtocolInterpreter *listen;
 @property (nonatomic, strong) DroneCommunicator *droneCmtor;
 @property (nonatomic, strong) ServerCommunicator *svrCmtor;
 @property (nonatomic, strong) NSArray *argus;
@@ -104,12 +105,16 @@
     [rightBtn addTarget:self action:@selector(onCLickRight:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:rightBtn];
 
+    //Auto control
+    self.listen = [[ProtocolInterpreter alloc] init];
+    [_listen start];
     
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+    self.listen = nil;
 }
 
 - (void)onCLickBtn:(UIButton *)sender {
