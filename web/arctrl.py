@@ -8,7 +8,7 @@ def ArComEnc(cmd, arg, cot):
 	return ' '.join(ck) + ';'
 
 def ArComDec(msg):
-	if msg[-1] != ';':
+	if msg[-1] != ';' && msg[-1] != '\n':
 		print '[ERR] MSG cannot be recognized.'
 		pass # throw EXCEPT
 	cm = msg.split(';')
@@ -22,12 +22,13 @@ def ArComDec(msg):
 				arg = cw[2:-1]
 				args = int(cw[-1])
 				if args != len(arg):
-					print 'ARComDec len VE'
+					print '[ERR] ARComDec len VE'
 					raise ValueError('Invalid Cmd')
 				ret.append((cnt, cmd, arg))
 			except Exception:
-				print 'ARCD VE'
+				print '[ERR] ARComDec VE'
 				raise ValueError('Invalid Cmd')
+	print ret
 	return ret
 
 def ArHeartBeatGen():
@@ -187,8 +188,8 @@ if __name__ == '__main__':
 			if aro.signed == True:
 				# pass msg to arc
 				pass
-	arc = ArCommander(8080, 10, 0.1, arc_act)
-	aro = ArOutsideCommander(8001, 10, 0.1, aro_act)
+	arc = ArCommander(8080, 10, 1, arc_act)
+	aro = ArOutsideCommander(8001, 10, 1, aro_act)
 	arc.start()
 	aro.start()
 	while True:
