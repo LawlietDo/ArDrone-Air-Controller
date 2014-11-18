@@ -43,10 +43,10 @@ class TaskPender:
 		self.mutex = threading.Lock()
 	def set(self, cmd, arg):
 		if self.mutex.acquire():
-			self.task = (ArComEnc(cmd, arg, count), count)
-			count += 1
+			self.task = (ArComEnc(cmd, arg, self.count), self.count)
+			self.count += 1
 			self.mutex.release()
-			return count
+			return self.count
 	def get(self):
 		if self.mutex.acquire():
 			ret = self.task
