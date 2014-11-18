@@ -5,7 +5,7 @@ import datetime
 
 def ArComEnc(cmd, arg, cot):
 	cm = [str(cot), cmd] + arg + [str(len(arg))]
-	return ' '.join(ck) + ';'
+	return ' '.join(cm) + ';'
 
 def ArComDec(msg):
 	if msg[-1] != ';' and msg[-1] != '\n':
